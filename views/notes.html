@@ -1,0 +1,26 @@
+<header class="topbar">
+  <h1 class="brand">Study Notes</h1>
+  <div class="topbar-actions">
+    <span class="muted user">{{ user.email }}</span>
+    <button type="button" class="btn" ng-click="logout()">Log out</button>
+  </div>
+</header>
+
+<div class="toolbar">
+  <p class="muted">{{ notes.length }} {{ notes.length === 1 ? 'note' : 'notes' }}</p>
+  <button type="button" class="btn btn-primary" ng-click="newNote()">+ New note</button>
+</div>
+
+<div class="empty" ng-if="notes.length === 0">
+  <p>No notes yet.</p>
+  <p class="muted">Create your first note to get started.</p>
+</div>
+
+<div class="grid" ng-if="notes.length > 0">
+  <a class="card" ng-repeat="note in notes track by note.id" ng-href="#!/editor/{{ note.id }}">
+    <h2 class="card-title">{{ note.title }}</h2>
+    <p class="card-preview" ng-if="note.body.trim()">{{ preview(note.body) }}</p>
+    <p class="card-preview muted" ng-if="!note.body.trim()">No content</p>
+    <p class="card-date muted">{{ note.updatedAt | date:'d MMM yyyy, HH:mm' }}</p>
+  </a>
+</div>

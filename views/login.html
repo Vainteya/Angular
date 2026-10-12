@@ -1,0 +1,35 @@
+<section class="login">
+  <h1 class="brand">Study Notes</h1>
+  <p class="muted">Sign in to your notes.</p>
+
+  <form name="loginForm" class="panel" ng-submit="login(loginForm)" novalidate>
+    <div class="field">
+      <label for="email">Email</label>
+      <input id="email" name="email" type="email" autocomplete="username"
+             ng-model="credentials.email"
+             ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]+$/"
+             required autofocus>
+      <p class="field-error" ng-if="(submitted || loginForm.email.$touched) && loginForm.email.$error.required">
+        Email is required.
+      </p>
+      <p class="field-error" ng-if="(submitted || loginForm.email.$touched) && (loginForm.email.$error.email || loginForm.email.$error.pattern)">
+        Enter a valid email address, like name@example.com.
+      </p>
+    </div>
+
+    <div class="field">
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" autocomplete="current-password"
+             ng-model="credentials.password" required>
+      <p class="field-error" ng-if="(submitted || loginForm.password.$touched) && loginForm.password.$error.required">
+        Password is required.
+      </p>
+    </div>
+
+    <p class="alert" ng-if="errorMessage">{{ errorMessage }}</p>
+
+    <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+  </form>
+
+  <p class="hint">Demo account: <code>{{ demoUser.email }}</code> / <code>{{ demoUser.password }}</code></p>
+</section>
